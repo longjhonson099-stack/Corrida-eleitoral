@@ -19,6 +19,7 @@ var aim_line: Line2D
 var hp_label: Label
 var hp_bar: ProgressBar
 var energy_bar: ProgressBar
+var power_bar: ProgressBar
 var name_label: Label
 var weapon_sprite: Sprite2D
 
@@ -32,6 +33,13 @@ signal died
 var texture_path: String = ""
 
 func _ready() -> void:
+	if not is_bot and get_node_or_null("/root/GameManager"):
+		var gm = get_node("/root/GameManager")
+		var adv_level = gm.team_talents.get("advogado", 0)
+		if adv_level > 0:
+			max_hp = int(max_hp * (1.0 + (adv_level * 0.05)))
+			hp = max_hp
+
 	# Visuals
 	sprite = Sprite2D.new()
 	if texture_path != "":
@@ -86,7 +94,7 @@ func _ready() -> void:
 	add_child(name_label)
 	
 	hp_bar = ProgressBar.new()
-	hp_bar.position = Vector2(-30, -60)
+	hp_bar.position = Vector2(-30, 40)
 	hp_bar.size = Vector2(60, 10)
 	hp_bar.min_value = 0
 	hp_bar.max_value = max_hp
@@ -102,15 +110,15 @@ func _ready() -> void:
 	
 	hp_label = Label.new()
 	hp_label.text = str(hp)
-	hp_label.position = Vector2(-15, -55)
-	hp_label.add_theme_font_size_override("font_size", 18)
+	hp_label.position = Vector2(-15, 42)
+	hp_label.add_theme_font_size_override("font_size", 12)
 	hp_label.add_theme_color_override("font_outline_color", Color.BLACK)
 	hp_label.add_theme_constant_override("outline_size", 3)
-	hp_label.modulate = Color.GREEN
+	hp_label.modulate = Color.WHITE
 	add_child(hp_label)
 	
 	energy_bar = ProgressBar.new()
-	energy_bar.position = Vector2(-30, -45)
+	energy_bar.position = Vector2(-30, 52)
 	energy_bar.size = Vector2(60, 8)
 	energy_bar.min_value = 0
 	energy_bar.max_value = max_energy
@@ -123,6 +131,22 @@ func _ready() -> void:
 	sb_efill.bg_color = Color.CYAN
 	energy_bar.add_theme_stylebox_override("fill", sb_efill)
 	add_child(energy_bar)
+	
+	power_bar = ProgressBar.new()
+	power_bar.position = Vector2(-30, 62)
+	power_bar.size = Vector2(60, 8)
+	power_bar.min_value = 0
+	power_bar.max_value = 100
+	power_bar.value = 0
+	power_bar.show_percentage = false
+	power_bar.visible = false
+	var sb_pbg = StyleBoxFlat.new()
+	sb_pbg.bg_color = Color(0.2, 0.2, 0.2, 1)
+	power_bar.add_theme_stylebox_override("background", sb_pbg)
+	var sb_pfill = StyleBoxFlat.new()
+	sb_pfill.bg_color = Color.RED
+	power_bar.add_theme_stylebox_override("fill", sb_pfill)
+	add_child(power_bar)
 	
 	# Aim line / Weapon sprite
 	aim_line = Line2D.new()
@@ -175,7 +199,11 @@ func _process_player_turn(delta: float) -> void:
 		aim_power += delta * 600.0
 		if aim_power > 1200.0:
 			aim_power = 1200.0
+		power_bar.visible = true
+		power_bar.max_value = 1200.0
+		power_bar.value = aim_power
 	else:
+		power_bar.visible = false
 		if aim_power > 200.0:
 			_animate_shoot()
 			get_parent()._fire_weapon()

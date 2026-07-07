@@ -5,6 +5,7 @@ var explosion_radius: float = 60.0
 var damage: int = 25
 var wind_force: Vector2 = Vector2.ZERO
 var weapon_type: String = "basic"
+var weapon_level: int = 1
 var attacker: Node = null
 
 var trail: Line2D
@@ -22,11 +23,23 @@ func _ready() -> void:
 		explosion_radius = 90.0
 	elif weapon_type == "dossie":
 		damage = 40
-		explosion_radius = 80.0
-	elif weapon_type == "robo_disparo":
-		damage = 15
-		explosion_radius = 40.0
+		explosion_radius = 70.0
+	elif weapon_type == "fake_news":
+		damage = 25
+		explosion_radius = 60.0
+	elif weapon_type == "cpi":
+		damage = 35
+		explosion_radius = 75.0
+	elif weapon_type == "comicio":
+		damage = 60
+		explosion_radius = 100.0
 		
+	# Scale by weapon level
+	if weapon_level > 1:
+		var multiplier = 1.0 + (weapon_level - 1) * 0.2 # +20% per level
+		damage = int(damage * multiplier)
+		explosion_radius = explosion_radius * (1.0 + (weapon_level - 1) * 0.1) # +10% radius per level
+
 	# Visual
 	var sprite = Sprite2D.new()
 	var tex = null
@@ -77,7 +90,7 @@ func _ready() -> void:
 	shape.shape = circle
 	add_child(shape)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if wind_force != Vector2.ZERO:
 		apply_force(wind_force * 10.0)
 	
@@ -127,17 +140,22 @@ func _on_body_entered(body: Node) -> void:
 	query.shape = circle_shape
 	query.transform = global_transform
 	
+	var final_damage = damage
+	if attacker != null and not attacker.is_bot and GameManager:
+		var marq_level = GameManager.team_talents.get("marqueteiro", 0)
+		final_damage = int(damage * (1.0 + (marq_level * 0.05)))
+		
 	var results = space_state.intersect_shape(query)
 	for result in results:
 		var collider = result.collider
 		if collider is Candidate:
-			collider.take_damage(damage)
+			collider.take_damage(final_damage)
 			# Apply knockback
 			var knock_force = 600.0 if weapon_type != "super_mala" else 1000.0
 			var dir = (collider.global_position - global_position).normalized()
 			collider.velocity += dir * knock_force
 		elif collider is CivilianNPC:
-			collider.take_damage(damage, attacker)
+			collider.take_damage(final_damage, attacker)
 			# Apply knockback
 			var knock_force = 400.0
 			var dir = (collider.global_position - global_position).normalized()

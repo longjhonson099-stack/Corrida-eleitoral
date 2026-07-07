@@ -84,11 +84,15 @@ func _ready() -> void:
 		p2.candidate_name = GameManager.player2_name
 		p2.texture_path = GameManager.player2_sprite
 		if GameManager.is_campaign:
-			var idx = clampi(GameManager.campaign_level - 1, 0, GameManager.campaign_tower.size() - 1)
-			var opp_data = GameManager.campaign_tower[idx]
-			if opp_data["is_boss"]:
-				p2.max_hp = 300
-				p2.hp = 300
+			var cur_league = GameManager.current_league
+			var cur_level = GameManager.campaign_levels.get(cur_league, 1)
+			var league_data = GameManager.campaign_leagues.get(cur_league, [])
+			if league_data.size() > 0:
+				var idx = clampi(cur_level - 1, 0, league_data.size() - 1)
+				var opp_data = league_data[idx]
+				if opp_data.get("is_boss", false):
+					p2.max_hp = 300
+					p2.hp = 300
 	add_child(p2)
 
 	p1.died.connect(func(): _end_game(p2.candidate_name, false))
@@ -104,21 +108,34 @@ func _ready() -> void:
 	var canvas = CanvasLayer.new()
 	add_child(canvas)
 	
-	var hud_panel = PanelContainer.new()
+	var hud_panel = TextureRect.new()
+	var img_hud = Image.new()
+	if img_hud.load("res://assets/ui/hud_frame_aaa.jpg") == OK:
+		hud_panel.texture = ImageTexture.create_from_image(img_hud)
+		hud_panel.ignore_texture_size = true
+		hud_panel.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	hud_panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	hud_panel.custom_minimum_size = Vector2(0, 60)
-	
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0.1, 0.1, 0.1, 0.8)
-	style.border_width_bottom = 4
-	style.border_color = Color.GOLD
-	hud_panel.add_theme_stylebox_override("panel", style)
+	hud_panel.custom_minimum_size = Vector2(0, 80)
 	canvas.add_child(hud_panel)
 	
 	var hud_hbox = HBoxContainer.new()
+	hud_hbox.set_anchors_preset(Control.PRESET_FULL_RECT)
 	hud_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	hud_hbox.add_theme_constant_override("separation", 50)
 	hud_panel.add_child(hud_hbox)
+	
+	# Portrait P1
+	var p1_portrait = TextureRect.new()
+	p1_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	p1_portrait.custom_minimum_size = Vector2(60, 60)
+	if ResourceLoader.exists(p1.texture_path):
+		var p1_tex = load(p1.texture_path)
+		if p1_tex: p1_portrait.texture = p1_tex
+	else:
+		var img = Image.new()
+		if img.load(p1.texture_path) == OK:
+			p1_portrait.texture = ImageTexture.create_from_image(img)
+	hud_hbox.add_child(p1_portrait)
 	
 	hud_turn_label = Label.new()
 	hud_turn_label.add_theme_font_size_override("font_size", 24)
@@ -131,10 +148,24 @@ func _ready() -> void:
 	hud_hbox.add_child(hud_timer_label)
 	
 	var hud_controls_label = Label.new()
-	hud_controls_label.text = "Setas: Mover/Mirar | X: Pular | ESPAÇO: Atirar"
+	hud_controls_label.text = "Setas: Mover/Mirar | X: Pular | ESPAÇO: Atirar | 1-5: Armas"
 	hud_controls_label.add_theme_font_size_override("font_size", 18)
 	hud_controls_label.add_theme_color_override("font_color", Color.WHITE)
 	hud_hbox.add_child(hud_controls_label)
+	
+	# Portrait P2
+	var p2_portrait = TextureRect.new()
+	p2_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	p2_portrait.custom_minimum_size = Vector2(60, 60)
+	p2_portrait.flip_h = true
+	if ResourceLoader.exists(p2.texture_path):
+		var p2_tex = load(p2.texture_path)
+		if p2_tex: p2_portrait.texture = p2_tex
+	else:
+		var img = Image.new()
+		if img.load(p2.texture_path) == OK:
+			p2_portrait.texture = ImageTexture.create_from_image(img)
+	hud_hbox.add_child(p2_portrait)
 	
 	# Weapon Selection HUD (Bottom)
 	var weapon_panel = PanelContainer.new()
@@ -155,56 +186,63 @@ func _ready() -> void:
 	weapon_hbox.add_theme_constant_override("separation", 20)
 	weapon_scroll.add_child(weapon_hbox)
 	
-	_add_weapon_btn(weapon_hbox, "basic", "Ataque Básico", -1, null)
-	if GameManager:
-		for item_id in GameManager.inventory.keys():
-			var count = GameManager.inventory[item_id]
-			if count > 0:
-				var item_name = item_id.capitalize()
-				var icon_tex = null
-				if item_id == "fake_news": 
-					item_name = "Fake News"
-				elif item_id == "cpi": 
-					item_name = "CPI"
-				elif item_id == "dossie": 
-					item_name = "Dossiê"
-					icon_tex = load("res://assets/sprites/weapon_dossie.png")
-				elif item_id == "comicio": 
-					item_name = "Super Comício"
-				
-				# Legacy items fallback
-				elif item_id == "super_mala": 
-					item_name = "Super Mala"
-					icon_tex = load("res://assets/sprites/weapon_mala.png")
-				elif item_id == "vento_divino": 
-					item_name = "Vento Divino"
-				elif item_id == "robo_disparo": 
-					item_name = "Robô de Disparo"
-					icon_tex = load("res://assets/sprites/weapon_robo.png")
-				elif item_id == "emenda":
-					item_name = "Emenda"
-					icon_tex = load("res://assets/sprites/weapon_emenda.png")
-					
-				_add_weapon_btn(weapon_hbox, item_id, item_name, count, icon_tex)
+	var dev_weapons = ["basic", "fake_news", "cpi", "dossie", "comicio", "super_mala", "robo_disparo", "emenda"]
+	
+	var shortcut_key = 1
+	for item_id in dev_weapons:
+		var item_name = item_id.capitalize()
+		var icon_tex = null
+		if item_id == "fake_news": item_name = "Fake News"
+		elif item_id == "cpi": item_name = "CPI"
+		elif item_id == "dossie": 
+			item_name = "Dossiê"
+			icon_tex = load("res://assets/sprites/weapon_dossie.png")
+		elif item_id == "comicio": item_name = "Super Comício"
+		elif item_id == "super_mala": 
+			item_name = "Super Mala"
+			icon_tex = load("res://assets/sprites/weapon_mala.png")
+		elif item_id == "robo_disparo": 
+			item_name = "Robô Disparo"
+			icon_tex = load("res://assets/sprites/weapon_robo.png")
+		elif item_id == "emenda":
+			item_name = "Emenda"
+			icon_tex = load("res://assets/sprites/weapon_emenda.png")
+		
+		# Fake infinite count for dev
+		_add_weapon_btn(weapon_hbox, item_id, item_name, -1, icon_tex, shortcut_key)
+		shortcut_key += 1
 				
 	# Start
 	turn_manager.register_candidates([p1, p2])
 
 var current_weapon: String = "basic"
 
-func _add_weapon_btn(parent: Node, id: String, item_name: String, count: int, icon_tex: Texture2D) -> void:
+func _add_weapon_btn(parent: Node, id: String, item_name: String, count: int, icon_tex: Texture2D, shortcut_key: int = -1) -> void:
 	var btn = Button.new()
 	var text = item_name
 	if count >= 0:
 		text += " (" + str(count) + ")"
+	if shortcut_key > 0 and shortcut_key <= 9:
+		text = "[" + str(shortcut_key) + "] " + text
+		
 	btn.text = text
 	if icon_tex:
 		btn.icon = icon_tex
 		btn.expand_icon = true
 	btn.add_theme_font_size_override("font_size", 18)
 	btn.custom_minimum_size = Vector2(180, 60)
+	btn.focus_mode = Control.FOCUS_NONE # Evita roubar o espaço do tiro
 	btn.pressed.connect(_on_weapon_selected.bind(id))
 	parent.add_child(btn)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		var key = event.keycode
+		if key >= KEY_1 and key <= KEY_9:
+			var index = key - KEY_1
+			var dev_weapons = ["basic", "fake_news", "cpi", "dossie", "comicio", "super_mala", "robo_disparo", "emenda"]
+			if index < dev_weapons.size():
+				_on_weapon_selected(dev_weapons[index])
 
 func _on_weapon_selected(id: String) -> void:
 	current_weapon = id
@@ -212,7 +250,7 @@ func _on_weapon_selected(id: String) -> void:
 	if turn_manager and turn_manager.active_candidate:
 		turn_manager.active_candidate.set_weapon(id)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if turn_manager.current_state == TurnManager.State.PLAYER_MOVING or turn_manager.current_state == TurnManager.State.AIMING:
 		var c = turn_manager.active_candidate
 		var wind_str = "Vento: " + str(snapped(turn_manager.wind_force.x, 0.1))
@@ -253,14 +291,12 @@ func _fire_weapon() -> void:
 		turn_manager.end_turn()
 		return
 		
-	# Consume other weapons
-	if current_weapon != "basic":
-		if GameManager and GameManager.inventory[current_weapon] > 0:
-			GameManager.inventory[current_weapon] -= 1
-			GameManager.save_game()
-		else:
-			# Not enough, fallback to basic
-			current_weapon = "basic"
+	# Não consome mais do inventário, pois agora as armas são baseadas em Energia
+	var weapon_level = 1
+	if current_weapon != "basic" and GameManager and GameManager.inventory.has(current_weapon):
+		var inv_item = GameManager.inventory[current_weapon]
+		if typeof(inv_item) == TYPE_DICTIONARY:
+			weapon_level = inv_item.get("level", 1)
 			
 	var spawn_pos = c.global_position + Vector2(cos(c.aim_angle), sin(c.aim_angle)) * 40.0
 	var impulse = Vector2(cos(c.aim_angle), sin(c.aim_angle)) * c.aim_power
@@ -269,7 +305,7 @@ func _fire_weapon() -> void:
 	if llm_client:
 		llm_client.generate_speech_async(c.candidate_name, "está atirando com " + current_weapon)
 	
-	turn_manager.fire_projectile(Projectile, spawn_pos, impulse, turn_manager.wind_force, current_weapon, c)
+	turn_manager.fire_projectile(Projectile, spawn_pos, impulse, turn_manager.wind_force, current_weapon, c, weapon_level)
 	current_weapon = "basic"
 
 func _on_turn_changed(c: Candidate) -> void:
@@ -316,7 +352,9 @@ func _end_game(winner_name: String, player_won: bool = false) -> void:
 	
 	if GameManager:
 		if player_won:
-			GameManager.votos_soft_currency += 100
+			var base_votos = 100
+			var mult = 1.0 + (0.1 * GameManager.team_talents.get("cabo_eleitoral", 0))
+			GameManager.votos_soft_currency += int(base_votos * mult)
 			if GameManager.is_campaign:
 				var league_id = GameManager.current_league
 				if not GameManager.campaign_levels.has(league_id):

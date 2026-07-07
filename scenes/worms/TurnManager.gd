@@ -44,7 +44,18 @@ func _next_turn() -> void:
 		
 		# Recompensas
 		if GameManager:
-			GameManager.votos_soft_currency += 100
+			var player_won = false
+			if candidates.size() == 1 and not candidates[0].is_bot:
+				player_won = true
+				
+			if player_won:
+				GameManager.votos_soft_currency += 100
+				GameManager.influencia += 30
+				print("Vitória! +100 Votos, +30 Influência")
+			else:
+				GameManager.influencia = maxi(0, GameManager.influencia - 20)
+				print("Derrota! -20 Influência")
+				
 			GameManager.save_game()
 			
 		await get_tree().create_timer(2.0).timeout
@@ -89,13 +100,15 @@ func _on_turn_timeout() -> void:
 		active_candidate.is_active_turn = false
 		_transition_to(State.END_TURN)
 
-func fire_projectile(projectile_class, spawn_pos: Vector2, impulse: Vector2, wind: Vector2 = Vector2.ZERO, weapon_type: String = "basic", shooter: Node = null) -> void:
+func fire_projectile(projectile_class, spawn_pos: Vector2, impulse: Vector2, wind: Vector2 = Vector2.ZERO, weapon_type: String = "basic", shooter: Node = null, weapon_level: int = 1) -> void:
 	var proj = projectile_class.new()
 	proj.global_position = spawn_pos
 	if "wind_force" in proj:
 		proj.wind_force = wind
 	if "weapon_type" in proj:
 		proj.weapon_type = weapon_type
+	if "weapon_level" in proj:
+		proj.weapon_level = weapon_level
 	if shooter:
 		proj.add_collision_exception_with(shooter)
 		if "attacker" in proj:

@@ -35,5 +35,5 @@ func take_damage(amount: int, attacker: Candidate = null) -> void:
 			# Visual feedback for popularity loss
 			var main = get_tree().current_scene
 			if main and main.has_method("_spawn_floating_text"):
-				main._spawn_floating_text("Civis atingidos! -%d Popularidade" % pop_penalty, global_position, Color.RED)
+				main._spawn_floating_text("Civis atingidos! -%d Popularidade" % pop_penalty, global_position)
 		queue_free()

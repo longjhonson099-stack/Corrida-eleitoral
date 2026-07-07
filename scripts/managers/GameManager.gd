@@ -20,13 +20,37 @@ var player_faction: String = "" # "Vermelho" ou "Verde"
 
 var votos_soft_currency: int = 0
 var fundos_hard_currency: int = 0
+var influencia: int = 0
+var season_exp: int = 0
+var season_tier: int = 1
+var has_premium_pass: bool = false
+
+var team_talents: Dictionary = {
+	"cabo_eleitoral": 0,
+	"marqueteiro": 0,
+	"advogado": 0
+}
+
+func get_cargo() -> String:
+	if influencia < 500: return "Vereador"
+	if influencia < 1500: return "Prefeito"
+	if influencia < 3000: return "Deputado"
+	if influencia < 5000: return "Governador"
+	return "Presidente"
+
+func get_next_cargo_goal() -> int:
+	if influencia < 500: return 500
+	if influencia < 1500: return 1500
+	if influencia < 3000: return 3000
+	if influencia < 5000: return 5000
+	return 5000
 
 var unlocked_characters: Array = ["O Velho Raposa", "O Lulista", "O Patriota"]
 var inventory: Dictionary = {
-	"fake_news": 0,
-	"cpi": 0,
-	"dossie": 0,
-	"comicio": 0
+	"fake_news": {"level": 1, "amount": 0},
+	"cpi": {"level": 1, "amount": 0},
+	"dossie": {"level": 1, "amount": 0},
+	"comicio": {"level": 1, "amount": 0}
 }
 
 const SAVE_PATH = "user://player_save.dat"
@@ -60,12 +84,19 @@ func save_game() -> void:
 		var data = {
 			"votos": votos_soft_currency,
 			"fundos": fundos_hard_currency,
+			"influencia": influencia,
+			"season_exp": season_exp,
+			"season_tier": season_tier,
+			"has_premium_pass": has_premium_pass,
 			"campaign_levels": campaign_levels,
 			"player_faction": player_faction,
 			"unlocked_characters": unlocked_characters,
-			"inventory": inventory
+			"inventory": inventory,
+			"current_league": current_league,
+			"team_talents": team_talents
 		}
 		file.store_string(JSON.stringify(data))
+		file.close()
 
 func load_game() -> void:
 	if FileAccess.file_exists(SAVE_PATH):
@@ -77,6 +108,11 @@ func load_game() -> void:
 				var data = json.get_data()
 				votos_soft_currency = data.get("votos", 0)
 				fundos_hard_currency = data.get("fundos", 0)
+				influencia = data.get("influencia", 0)
+				season_exp = data.get("season_exp", 0)
+				season_tier = data.get("season_tier", 1)
+				has_premium_pass = data.get("has_premium_pass", false)
+				current_league = data.get("current_league", "municipal")
 				if data.has("campaign_levels"):
 					campaign_levels = data["campaign_levels"]
 				elif data.has("campaign_level"): # legacy fallback
@@ -86,7 +122,14 @@ func load_game() -> void:
 					unlocked_characters = data["unlocked_characters"]
 				if data.has("inventory"):
 					for key in data["inventory"].keys():
-						inventory[key] = data["inventory"][key]
+						var val = data["inventory"][key]
+						if typeof(val) == TYPE_INT or typeof(val) == TYPE_FLOAT:
+							inventory[key] = {"level": 1, "amount": int(val)}
+						else:
+							inventory[key] = val
+				if data.has("team_talents"):
+					for key in data["team_talents"].keys():
+						team_talents[key] = data["team_talents"][key]
 
 func setup_campaign_match() -> void:
 	if not campaign_leagues.has(current_league):
