@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d3j2abc123"]
+
+[ext_resource type="Script" path="res://scenes/worms/WormsLevel.gd" id="1_qwe"]
+
+[node name="WormsLevel" type="Node2D"]
+script = ExtResource("1_qwe")

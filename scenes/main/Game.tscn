@@ -1,0 +1,144 @@
+[gd_scene load_steps=3 format=3 uid="uid://djkqlk3y4k2h3"]
+
+[ext_resource type="Script" path="res://scenes/main/Game.gd" id="1_a2b3c"]
+[ext_resource type="Script" path="res://scripts/managers/EconomyManager.gd" id="2_c3d4e"]
+[ext_resource type="Script" path="res://scripts/managers/LocalLLMClient.gd" id="3_llm"]
+[ext_resource type="Texture2D" uid="uid://bxn2xp6x4jm3v" path="res://assets/textures/game_background.jpg" id="3_bg"]
+[ext_resource type="Texture2D" uid="uid://paul6bmlysuf" path="res://assets/textures/leader_character.jpg" id="4_char"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a2b3c")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="EconomyManager" type="Node" parent="."]
+script = ExtResource("2_c3d4e")
+
+[node name="LocalLLMClient" type="Node" parent="."]
+script = ExtResource("3_llm")
+
+[node name="FloatingTexts" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UI" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="VBoxContainer" parent="UI"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelPrestige" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Multiplicador de Fanatismo: 1.0x"
+horizontal_alignment = 1
+
+[node name="LabelDiscursos" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Discursos Gerados: 0"
+horizontal_alignment = 1
+
+[node name="TugOfWarBar" type="ProgressBar" parent="UI"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+value = 50.0
+
+[node name="CenterArea" type="CenterContainer" parent="UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BtnGenerate" type="TextureButton" parent="UI/CenterArea"]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 2
+texture_normal = ExtResource("4_char")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnUrgentNews" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 100.0
+offset_top = 300.0
+offset_right = 400.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "🚨 NOTÍCIA URGENTE 🚨"
+
+[node name="UpgradesScroll" type="ScrollContainer" parent="UI"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="UpgradesList" type="VBoxContainer" parent="UI/UpgradesScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EndGamePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndGamePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="LabelResult" type="Label" parent="EndGamePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "VOCÊ VENCEU!"
+horizontal_alignment = 1
+
+[node name="BtnRestart" type="Button" parent="EndGamePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Próximo Mandato (Reiniciar +50% Ganho)"
+
+[connection signal="pressed" from="UI/CenterArea/BtnGenerate" to="." method="_on_btn_generate_pressed"]
+[connection signal="pressed" from="BtnUrgentNews" to="." method="_on_btn_urgent_news_pressed"]
+[connection signal="pressed" from="EndGamePanel/VBoxContainer/BtnRestart" to="." method="_on_btn_restart_pressed"]

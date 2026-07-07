@@ -1,0 +1,497 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+====================================================
+   INICIANDO SUÍTE DE TESTES E2E HEADLESS GODOT     
+====================================================
+Efetuando backup do save existente...
+Backup criado com sucesso.
+Encontrados 8 arquivos de teste.
+
+--- Executando arquivo de teste: res://tests/e2e/test_cross_feature.gd ---
+  Executando: test_01_clicker_and_upgrades_interaction
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_01_clicker_and_upgrades_interaction
+  Executando: test_02_upgrades_and_prestige_interaction
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:38 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:38 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_02_upgrades_and_prestige_interaction
+  Executando: test_03_fake_news_and_upgrades_interaction
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 600.000000
+  [PASS] test_03_fake_news_and_upgrades_interaction
+  Executando: test_04_llm_speech_and_prestige_interaction
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_04_llm_speech_and_prestige_interaction
+  Executando: test_05_llm_speech_and_tug_of_war_interaction
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_05_llm_speech_and_tug_of_war_interaction
+  Executando: test_06_fake_news_and_tug_of_war_interaction
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+  [PASS] test_06_fake_news_and_tug_of_war_interaction
+
+--- Executando arquivo de teste: res://tests/e2e/test_fake_news.gd ---
+  Executando: test_01_fake_news_initial_hidden
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_01_fake_news_initial_hidden
+  Executando: test_02_fake_news_spawn_makes_visible
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_02_fake_news_spawn_makes_visible
+  Executando: test_03_fake_news_spawn_random_position
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+WARNING: Nodes with non-equal opposite anchors will have their size overridden after _ready(). 
+If you want to set size, change the anchors or consider using set_deferred().
+   at: _set_size (scene/gui/control.cpp:1487)
+   GDScript backtrace (most recent call first):
+       [0] test_03_fake_news_spawn_random_position (res://tests/e2e/test_fake_news.gd:13)
+       [1] run (res://tests/E2ETestRunner.gd:64)
+  [PASS] test_03_fake_news_spawn_random_position
+  Executando: test_04_fake_news_clicking_adds_bonus
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+  [PASS] test_04_fake_news_clicking_adds_bonus
+  Executando: test_05_fake_news_clicking_hides_button
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+  [PASS] test_05_fake_news_clicking_hides_button
+  Executando: test_06_fake_news_bonus_scales_with_dps
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 300.000000
+  [PASS] test_06_fake_news_bonus_scales_with_dps
+  Executando: test_07_fake_news_bonus_under_prestige
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+  [PASS] test_07_fake_news_bonus_under_prestige
+  Executando: test_08_fake_news_clicking_when_inactive
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+  [PASS] test_08_fake_news_clicking_when_inactive
+  Executando: test_09_fake_news_rapid_double_clicks
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+  [PASS] test_09_fake_news_rapid_double_clicks
+  Executando: test_10_fake_news_timer_restarts
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:38 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+  [PASS] test_10_fake_news_timer_restarts
+
+--- Executando arquivo de teste: res://tests/e2e/test_llm_speech.gd ---
+  Executando: test_01_llm_client_dynamic_swap
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_01_llm_client_dynamic_swap
+  Executando: test_02_llm_speech_generates_successfully
+21:11:38 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:38 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_02_llm_speech_generates_successfully
+  Executando: test_03_llm_speech_fails_gracefully
+21:11:39 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:39 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_03_llm_speech_fails_gracefully
+  Executando: test_04_llm_thinking_state_during_generation
+21:11:39 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:39 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_04_llm_thinking_state_during_generation
+  Executando: test_05_llm_rewards_discursos
+21:11:39 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:39 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_05_llm_rewards_discursos
+  Executando: test_06_llm_speech_when_game_inactive
+21:11:39 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:39 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_06_llm_speech_when_game_inactive
+  Executando: test_07_llm_speech_multiple_overlapping_requests
+21:11:39 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:39 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_07_llm_speech_multiple_overlapping_requests
+  Executando: test_08_llm_speech_empty_prompt
+21:11:39 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:39 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_08_llm_speech_empty_prompt
+  Executando: test_09_llm_speech_timeout_simulation
+21:11:39 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:39 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_09_llm_speech_timeout_simulation
+  Executando: test_10_llm_speech_null_client
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+WARNING: LLM Client não configurado.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:32)
+       [1] warning (res://scripts/utils/Logger.gd:17)
+       [2] generate_speech (res://scenes/main/Game.gd:255)
+       [3] test_10_llm_speech_null_client (res://tests/e2e/test_llm_speech.gd:133)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:40 [WARN]: LLM Client não configurado.
+  [PASS] test_10_llm_speech_null_client
+
+--- Executando arquivo de teste: res://tests/e2e/test_manual_clicker.gd ---
+  Executando: test_01_adds_discursos
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_01_adds_discursos
+  Executando: test_02_updates_tug_of_war
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_02_updates_tug_of_war
+  Executando: test_03_triggers_button_animation
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_03_triggers_button_animation
+  Executando: test_04_spawns_floating_text
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_04_spawns_floating_text
+  Executando: test_05_fails_if_game_inactive
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+WARNING: Tentativa de clique de geração após game over.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:32)
+       [1] warning (res://scripts/utils/Logger.gd:17)
+       [2] _on_btn_generate_pressed (res://scenes/main/Game.gd:90)
+       [3] test_05_fails_if_game_inactive (res://tests/e2e/test_manual_clicker.gd:31)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:40 [WARN]: Tentativa de clique de geração após game over.
+  [PASS] test_05_fails_if_game_inactive
+  Executando: test_06_rapid_clicks
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_06_rapid_clicks
+  Executando: test_07_prestige_influence
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_07_prestige_influence
+  Executando: test_08_near_win_boundary
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:40 [INFO]: Fim de Jogo. Jogador Venceu? true
+  [PASS] test_08_near_win_boundary
+  Executando: test_09_at_zero_prestige
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_09_at_zero_prestige
+  Executando: test_10_with_huge_score
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_10_with_huge_score
+
+--- Executando arquivo de teste: res://tests/e2e/test_prestige.gd ---
+  Executando: test_01_prestige_resets_discursos
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:40 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:40 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:40 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_01_prestige_resets_discursos
+  Executando: test_02_prestige_resets_upgrades_counts
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:40 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:40 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:40 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_02_prestige_resets_upgrades_counts
+  Executando: test_03_prestige_increases_multiplier
+21:11:40 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:40 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:40 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:40 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:40 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_03_prestige_increases_multiplier
+  Executando: test_04_prestige_emits_signals
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+    [ASSERT FAIL] Prestige emits prestige_changed signal
+    [ASSERT FAIL] Signal passes correct new multiplier (Actual: 0.0, Expected: 1.5)
+  [FAIL] test_04_prestige_emits_signals
+  Executando: test_05_prestige_saves_state
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 2.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 2.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Save carregado com sucesso.
+  [PASS] test_05_prestige_saves_state
+  Executando: test_06_prestige_with_high_multiplier
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 50.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 50.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_06_prestige_with_high_multiplier
+  Executando: test_07_prestige_recalculates_dps_correctly
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_07_prestige_recalculates_dps_correctly
+  Executando: test_08_prestige_ui_label_updates
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_08_prestige_ui_label_updates
+  Executando: test_09_prestige_preserves_score_in_economy
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_09_prestige_preserves_score_in_economy
+  Executando: test_10_multiple_consecutive_runs
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 1.500000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 2.000000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 2.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 2.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 2.500000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 3.000000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_10_multiple_consecutive_runs
+
+--- Executando arquivo de teste: res://tests/e2e/test_scenarios.gd ---
+  Executando: test_01_scenario_speedrun_victory
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 1)
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 2)
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Fim de Jogo. Jogador Venceu? true
+  [PASS] test_01_scenario_speedrun_victory
+  Executando: test_02_scenario_hard_fought_comeback
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Notícia urgente clicada. Bônus ganho: 100.000000
+21:11:41 [INFO]: Upgrade comprado: Exército de Robôs (Novo count: 1)
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Fim de Jogo. Jogador Venceu? true
+  [PASS] test_02_scenario_hard_fought_comeback
+  Executando: test_03_scenario_loss_and_restart_with_prestige
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:41 [INFO]: Fim de Jogo. Jogador Venceu? false
+21:11:41 [INFO]: Reiniciando mandato...
+21:11:41 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:41 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_03_scenario_loss_and_restart_with_prestige
+  Executando: test_04_scenario_llm_driven_campaign
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+DEBUG Scenario LLM Campaign:
+  discursos: 50.0
+  prestige_multiplier: 1.0
+  is_connected: true
+21:11:41 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 1)
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 2)
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:41 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 3)
+21:11:41 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_04_scenario_llm_driven_campaign
+  Executando: test_05_scenario_passive_playthrough
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_05_scenario_passive_playthrough
+
+--- Executando arquivo de teste: res://tests/e2e/test_tug_of_war.gd ---
+  Executando: test_01_tow_initial_balance
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:41 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_01_tow_initial_balance
+  Executando: test_02_tow_simulate_enemy_increases_blue
+21:11:41 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_02_tow_simulate_enemy_increases_blue
+  Executando: test_03_tow_update_tug_of_war_bar_value
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_03_tow_update_tug_of_war_bar_value
+  Executando: test_04_tow_win_triggers_end_game
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Fim de Jogo. Jogador Venceu? true
+  [PASS] test_04_tow_win_triggers_end_game
+  Executando: test_05_tow_loss_triggers_end_game
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Fim de Jogo. Jogador Venceu? false
+  [PASS] test_05_tow_loss_triggers_end_game
+  Executando: test_06_tow_restart_resets_scores
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Reiniciando mandato...
+21:11:42 [INFO]: Realizando Prestige. Multiplicador atual: 1.000000
+21:11:42 [INFO]: Prestige concluído. Novo multiplicador: 1.500000
+21:11:42 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_06_tow_restart_resets_scores
+  Executando: test_07_tow_exact_win_boundary
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Fim de Jogo. Jogador Venceu? true
+  [PASS] test_07_tow_exact_win_boundary
+  Executando: test_08_tow_exact_loss_boundary
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Fim de Jogo. Jogador Venceu? false
+  [PASS] test_08_tow_exact_loss_boundary
+  Executando: test_09_tow_division_by_zero_prevention
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+ERROR: Divisão por zero prevenida no cálculo de Tug Of War!
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:35)
+       [1] error (res://scripts/utils/Logger.gd:20)
+       [2] _update_tug_of_war (res://scenes/main/Game.gd:132)
+       [3] test_09_tow_division_by_zero_prevention (res://tests/e2e/test_tug_of_war.gd:69)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:42 [ERROR]: Divisão por zero prevenida no cálculo de Tug Of War!
+  [PASS] test_09_tow_division_by_zero_prevention
+  Executando: test_10_tow_ui_panel_displays
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Fim de Jogo. Jogador Venceu? true
+21:11:42 [INFO]: Fim de Jogo. Jogador Venceu? false
+  [PASS] test_10_tow_ui_panel_displays
+
+--- Executando arquivo de teste: res://tests/e2e/test_upgrades.gd ---
+  Executando: test_01_upgrade_list_count
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_01_upgrade_list_count
+  Executando: test_02_upgrade_costs
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_02_upgrade_costs
+  Executando: test_03_buy_upgrade_success
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 1)
+21:11:42 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_03_buy_upgrade_success
+  Executando: test_04_buy_upgrade_recalculates_dps
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 1)
+21:11:42 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:42 [INFO]: Upgrade comprado: Exército de Robôs (Novo count: 1)
+21:11:42 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_04_buy_upgrade_recalculates_dps
+  Executando: test_05_cannot_buy_if_insufficient_funds
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+WARNING: Tentativa de comprar upgrade sem saldo suficiente.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:32)
+       [1] warning (res://scripts/utils/Logger.gd:17)
+       [2] buy_upgrade (res://scripts/managers/EconomyManager.gd:87)
+       [3] test_05_cannot_buy_if_insufficient_funds (res://tests/e2e/test_upgrades.gd:42)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:42 [WARN]: Tentativa de comprar upgrade sem saldo suficiente.
+  [PASS] test_05_cannot_buy_if_insufficient_funds
+  Executando: test_06_buy_upgrade_with_exact_funds
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:42 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 1)
+21:11:42 [INFO]: Jogo salvo com sucesso em user://savegame.save
+  [PASS] test_06_buy_upgrade_with_exact_funds
+  Executando: test_07_upgrade_cost_rounding
+21:11:42 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:42 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_07_upgrade_cost_rounding
+  Executando: test_08_dps_multiplier_application
+21:11:43 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:43 [INFO]: Game.gd _ready() inicializado com sucesso.
+  [PASS] test_08_dps_multiplier_application
+  Executando: test_09_invalid_upgrade_index
+21:11:43 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:43 [INFO]: Game.gd _ready() inicializado com sucesso.
+ERROR: EconomyManager: buy_upgrade chamado com index inválido (-1)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:35)
+       [1] error (res://scripts/utils/Logger.gd:20)
+       [2] buy_upgrade (res://scripts/managers/EconomyManager.gd:74)
+       [3] test_09_invalid_upgrade_index (res://tests/e2e/test_upgrades.gd:71)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:43 [ERROR]: EconomyManager: buy_upgrade chamado com index inválido (-1)
+ERROR: EconomyManager: buy_upgrade chamado com index inválido (99)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:35)
+       [1] error (res://scripts/utils/Logger.gd:20)
+       [2] buy_upgrade (res://scripts/managers/EconomyManager.gd:74)
+       [3] test_09_invalid_upgrade_index (res://tests/e2e/test_upgrades.gd:72)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:43 [ERROR]: EconomyManager: buy_upgrade chamado com index inválido (99)
+ERROR: EconomyManager: get_upgrade_cost chamado com index inválido (-1)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:35)
+       [1] error (res://scripts/utils/Logger.gd:20)
+       [2] get_upgrade_cost (res://scripts/managers/EconomyManager.gd:59)
+       [3] test_09_invalid_upgrade_index (res://tests/e2e/test_upgrades.gd:73)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:43 [ERROR]: EconomyManager: get_upgrade_cost chamado com index inválido (-1)
+ERROR: EconomyManager: get_upgrade_cost chamado com index inválido (99)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _log (res://scripts/utils/Logger.gd:35)
+       [1] error (res://scripts/utils/Logger.gd:20)
+       [2] get_upgrade_cost (res://scripts/managers/EconomyManager.gd:59)
+       [3] test_09_invalid_upgrade_index (res://tests/e2e/test_upgrades.gd:74)
+       [4] run (res://tests/E2ETestRunner.gd:64)
+21:11:43 [ERROR]: EconomyManager: get_upgrade_cost chamado com index inválido (99)
+  [PASS] test_09_invalid_upgrade_index
+  Executando: test_10_upgrade_purchase_saves_state
+21:11:43 [INFO]: Nenhum save encontrado. Iniciando novo jogo.
+21:11:43 [INFO]: Game.gd _ready() inicializado com sucesso.
+21:11:43 [INFO]: Upgrade comprado: Tia do Zap (Novo count: 1)
+21:11:43 [INFO]: Jogo salvo com sucesso em user://savegame.save
+21:11:43 [INFO]: Save carregado com sucesso.
+  [PASS] test_10_upgrade_purchase_saves_state
+Restaurando backup do save...
+Save restaurado.
+
+====================================================
+   RESULTADOS DOS TESTES E2E:
+   Arquivos executados: 8
+   Casos de teste executados: 71
+   Asserções válidas: 113
+   Asserções falhas: 2
+====================================================
+SUÍTE DE TESTES E2E: REJEITADA (Exit Code 1)
