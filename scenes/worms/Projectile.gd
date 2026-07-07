@@ -5,6 +5,7 @@ var explosion_radius: float = 60.0
 var damage: int = 25
 var wind_force: Vector2 = Vector2.ZERO
 var weapon_type: String = "basic"
+var attacker: Node = null
 
 var trail: Line2D
 var explosion_snd: AudioStreamPlayer
@@ -116,7 +117,7 @@ func _on_body_entered(body: Node) -> void:
 	
 	# Trigger explosion
 	if body is DestructibleTerrain:
-		body.clip_circle(global_position, explosion_radius)
+		body.call_deferred("clip_circle", global_position, explosion_radius)
 	
 	# Deal damage in radius
 	var space_state = get_world_2d().direct_space_state
@@ -135,6 +136,12 @@ func _on_body_entered(body: Node) -> void:
 			var knock_force = 600.0 if weapon_type != "super_mala" else 1000.0
 			var dir = (collider.global_position - global_position).normalized()
 			collider.velocity += dir * knock_force
+		elif collider is CivilianNPC:
+			collider.take_damage(damage, attacker)
+			# Apply knockback
+			var knock_force = 400.0
+			var dir = (collider.global_position - global_position).normalized()
+			collider.apply_impulse(dir * knock_force)
 			
 	# Cluster logic for Robo Disparo
 	if weapon_type == "robo_disparo":

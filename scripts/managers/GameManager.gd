@@ -23,10 +23,10 @@ var fundos_hard_currency: int = 0
 
 var unlocked_characters: Array = ["O Velho Raposa", "O Lulista", "O Patriota"]
 var inventory: Dictionary = {
-	"super_mala": 0,
-	"vento_divino": 0,
+	"fake_news": 0,
+	"cpi": 0,
 	"dossie": 0,
-	"robo_disparo": 0
+	"comicio": 0
 }
 
 const SAVE_PATH = "user://player_save.dat"
@@ -85,7 +85,8 @@ func load_game() -> void:
 				if data.has("unlocked_characters"):
 					unlocked_characters = data["unlocked_characters"]
 				if data.has("inventory"):
-					inventory = data["inventory"]
+					for key in data["inventory"].keys():
+						inventory[key] = data["inventory"][key]
 
 func setup_campaign_match() -> void:
 	if not campaign_leagues.has(current_league):

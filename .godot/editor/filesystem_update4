@@ -1,2 +1,4 @@
 res://scenes/worms/Candidate.gd
+res://scenes/worms/Projectile.gd
+res://scenes/worms/TurnManager.gd
 res://scenes/worms/WormsLevel.gd

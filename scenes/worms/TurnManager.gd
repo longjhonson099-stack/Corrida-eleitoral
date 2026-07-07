@@ -41,6 +41,14 @@ func start_match() -> void:
 func _next_turn() -> void:
 	if candidates.size() <= 1:
 		print("Game Over!")
+		
+		# Recompensas
+		if GameManager:
+			GameManager.votos_soft_currency += 100
+			GameManager.save_game()
+			
+		await get_tree().create_timer(2.0).timeout
+		get_tree().change_scene_to_file("res://scenes/hub/CityMap.tscn")
 		return
 		
 	turn_index = (turn_index + 1) % candidates.size()
@@ -90,6 +98,8 @@ func fire_projectile(projectile_class, spawn_pos: Vector2, impulse: Vector2, win
 		proj.weapon_type = weapon_type
 	if shooter:
 		proj.add_collision_exception_with(shooter)
+		if "attacker" in proj:
+			proj.attacker = shooter
 	get_parent().add_child(proj)
 	proj.apply_impulse(impulse)
 	

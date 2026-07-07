@@ -16,12 +16,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="CorridaEleitoral"
 config/description="Idle Clicker game sobre polarizacao e cabo de guerra eleitoral."
-run/main_scene="res://scenes/worms/MainMenu.tscn"
+run/main_scene="res://scenes/hub/CityMap.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
 
 GameManager="*res://scripts/managers/GameManager.gd"
+GameData="*res://scripts/data/GameData.gd"
 Logger="*res://scripts/utils/Logger.gd"
 SaveManager="*res://scripts/utils/SaveManager.gd"
 

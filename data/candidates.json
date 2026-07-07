@@ -1,0 +1,42 @@
+{
+	"o_velho_raposa": {
+		"name": "O Velho Raposa",
+		"sprite": "res://assets/sprites/cand_raposa.png",
+		"base_hp": 100,
+		"base_energy": 100,
+		"ability": "negotiator",
+		"rarity": "common"
+	},
+	"o_lulista": {
+		"name": "O Lulista",
+		"sprite": "res://assets/sprites/cand_lula.png",
+		"base_hp": 120,
+		"base_energy": 90,
+		"ability": "charismatic",
+		"rarity": "rare"
+	},
+	"o_patriota": {
+		"name": "O Patriota",
+		"sprite": "res://assets/sprites/cand_bolsonaro.png",
+		"base_hp": 110,
+		"base_energy": 110,
+		"ability": "controversial",
+		"rarity": "rare"
+	},
+	"o_poste": {
+		"name": "O Poste",
+		"sprite": "res://assets/sprites/cand_poste.png",
+		"base_hp": 80,
+		"base_energy": 100,
+		"ability": "puppet",
+		"rarity": "common"
+	},
+	"o_coach": {
+		"name": "O Coach",
+		"sprite": "res://assets/sprites/cand_coach.png",
+		"base_hp": 90,
+		"base_energy": 120,
+		"ability": "mindset",
+		"rarity": "common"
+	}
+}

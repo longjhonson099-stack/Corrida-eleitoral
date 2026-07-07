@@ -9,6 +9,18 @@ var hud_turn_label: Label
 var hud_timer_label: Label
 var floating_texts: Node2D
 
+var attack_energy_costs = {
+	"basic": 10,
+	"super_mala": 30,
+	"vento_divino": 20,
+	"dossie": 35,
+	"robo_disparo": 40,
+	"emenda": 25,
+	"fake_news": 40,
+	"comicio": 70,
+	"cpi": 100
+}
+
 func _ready() -> void:
 	# LLM
 	var LlmClass = load("res://scripts/managers/LocalLLMClient.gd")
@@ -82,6 +94,12 @@ func _ready() -> void:
 	p1.died.connect(func(): _end_game(p2.candidate_name, false))
 	p2.died.connect(func(): _end_game(p1.candidate_name, true))
 	
+	# Spawn Civilians
+	for i in range(3):
+		var civ = CivilianNPC.new()
+		civ.global_position = Vector2(randf_range(300, 800), 100)
+		add_child(civ)
+	
 	# UI HUD
 	var canvas = CanvasLayer.new()
 	add_child(canvas)
@@ -144,20 +162,29 @@ func _ready() -> void:
 			if count > 0:
 				var item_name = item_id.capitalize()
 				var icon_tex = null
-				if item_id == "super_mala": 
+				if item_id == "fake_news": 
+					item_name = "Fake News"
+				elif item_id == "cpi": 
+					item_name = "CPI"
+				elif item_id == "dossie": 
+					item_name = "Dossiê"
+					icon_tex = load("res://assets/sprites/weapon_dossie.png")
+				elif item_id == "comicio": 
+					item_name = "Super Comício"
+				
+				# Legacy items fallback
+				elif item_id == "super_mala": 
 					item_name = "Super Mala"
 					icon_tex = load("res://assets/sprites/weapon_mala.png")
 				elif item_id == "vento_divino": 
 					item_name = "Vento Divino"
-				elif item_id == "dossie": 
-					item_name = "Dossiê"
-					icon_tex = load("res://assets/sprites/weapon_dossie.png")
 				elif item_id == "robo_disparo": 
 					item_name = "Robô de Disparo"
 					icon_tex = load("res://assets/sprites/weapon_robo.png")
 				elif item_id == "emenda":
 					item_name = "Emenda"
 					icon_tex = load("res://assets/sprites/weapon_emenda.png")
+					
 				_add_weapon_btn(weapon_hbox, item_id, item_name, count, icon_tex)
 				
 	# Start
@@ -206,6 +233,16 @@ func _process(delta: float) -> void:
 func _fire_weapon() -> void:
 	var c = turn_manager.active_candidate
 	
+	var cost = attack_energy_costs.get(current_weapon, 10)
+	if c.energy < cost:
+		_spawn_floating_text("Sem energia política!", c.global_position + Vector2(0, -50))
+		current_weapon = "basic"
+		turn_manager.turn_timer.start(turn_manager.turn_time)
+		return
+		
+	c.energy -= cost
+	c.energy_bar.value = c.energy
+	
 	if current_weapon == "vento_divino":
 		if GameManager and GameManager.inventory["vento_divino"] > 0:
 			GameManager.inventory["vento_divino"] -= 1
@@ -239,6 +276,11 @@ func _on_turn_changed(c: Candidate) -> void:
 	hud_turn_label.text = "Turno: " + c.candidate_name
 	current_weapon = "basic"
 	c.set_weapon("basic")
+	
+	# Regenerar energia política
+	c.energy = min(c.energy + 20, c.max_energy)
+	if c.energy_bar:
+		c.energy_bar.value = c.energy
 
 func _on_state_changed(state) -> void:
 	if state == TurnManager.State.PROJECTILE_IN_AIR:

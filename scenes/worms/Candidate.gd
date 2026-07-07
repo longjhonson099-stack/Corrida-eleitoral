@@ -8,6 +8,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_active_turn = false
 var max_hp = 100
 var hp = 100
+var max_energy = 100
+var energy = 100
 var candidate_name = "Político"
 var is_bot = false
 
@@ -16,6 +18,7 @@ var sprite: Sprite2D
 var aim_line: Line2D
 var hp_label: Label
 var hp_bar: ProgressBar
+var energy_bar: ProgressBar
 var name_label: Label
 var weapon_sprite: Sprite2D
 
@@ -105,6 +108,21 @@ func _ready() -> void:
 	hp_label.add_theme_constant_override("outline_size", 3)
 	hp_label.modulate = Color.GREEN
 	add_child(hp_label)
+	
+	energy_bar = ProgressBar.new()
+	energy_bar.position = Vector2(-30, -45)
+	energy_bar.size = Vector2(60, 8)
+	energy_bar.min_value = 0
+	energy_bar.max_value = max_energy
+	energy_bar.value = energy
+	energy_bar.show_percentage = false
+	var sb_ebg = StyleBoxFlat.new()
+	sb_ebg.bg_color = Color(0.2, 0.2, 0.2, 1)
+	energy_bar.add_theme_stylebox_override("background", sb_ebg)
+	var sb_efill = StyleBoxFlat.new()
+	sb_efill.bg_color = Color.CYAN
+	energy_bar.add_theme_stylebox_override("fill", sb_efill)
+	add_child(energy_bar)
 	
 	# Aim line / Weapon sprite
 	aim_line = Line2D.new()
