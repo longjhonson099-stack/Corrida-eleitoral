@@ -206,6 +206,9 @@ func _process_player_turn(delta: float) -> void:
 		power_bar.visible = false
 		if aim_power > 200.0:
 			_animate_shoot()
+			# Refatorado: Usa o novo sistema de gerenciamento de armas
+			var weapon_mgr = WeaponManager.new()
+			weapon_mgr.fire_weapon(global_position, Vector2(cos(aim_angle), sin(aim_angle)))
 			get_parent()._fire_weapon()
 			aim_power = 200.0
 			

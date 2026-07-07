@@ -73,6 +73,8 @@ func _ready() -> void:
 	var p1 = Candidate.new()
 	p1.global_position = Vector2(200, 300)
 	if GameManager:
+		# Aplicar cor baseada na facção
+		p1.modulate = Color.RED if GameManager.player_faction == "Vermelho" else Color.GREEN
 		p1.candidate_name = GameManager.player1_name
 		p1.texture_path = GameManager.player1_sprite
 	add_child(p1)

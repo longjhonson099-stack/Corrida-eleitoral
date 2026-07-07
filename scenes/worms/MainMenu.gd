@@ -192,6 +192,12 @@ func _ready() -> void:
 	btn_play.pressed.connect(_on_play_pressed.bind(false))
 	buttons_vbox.add_child(btn_play)
 	
+	var btn_treino = Button.new()
+	btn_treino.text = "MODO TREINO"
+	btn_treino.add_theme_font_size_override("font_size", 32)
+	btn_treino.pressed.connect(_on_play_pressed.bind(false)) # Conectado ao Jogo Livre por enquanto
+	buttons_vbox.add_child(btn_treino)
+	
 	var btn_shop = Button.new()
 	btn_shop.text = "🛒 MERCADO ELEITORAL (LOJA)"
 	btn_shop.add_theme_font_size_override("font_size", 24)
